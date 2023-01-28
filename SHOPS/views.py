@@ -7,7 +7,8 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'SHOPS/basic.html')
+
+    return render(request, 'SHOPS/main.html')
 
 
 def About(request):
@@ -33,10 +34,14 @@ def TrackOrder(request):
 def Addtocart(request):
     return render(request, 'SHOPS/Addtocart.html')
 
+def Services(request):
+    return render(request, 'SHOPS/services.html')
+
+def New_lister(request):
+    return render(request, 'SHOPS/services.html')
+
 
 def Authorization(request):
-    agent = True
-    paramerter={'value1': agent}
     if request.method == "POST":
         username = request.POST['username']
         fname = request.POST['Finame']
@@ -46,15 +51,15 @@ def Authorization(request):
         pass2 = request.POST['Pass2']
 
         if '@' not in username:
-            agent =False
-            
-            return redirect("signup", paramerter)
+            agent = False
+            messages.error(request, "Enter a correct userame pattren")
+            return redirect("home")
         if pass1 != pass2:
             raise ValueError("Password do matched.")
         myuser = User.objects.create_user(username, email, pass1)
         myuser = User.first_name = fname
         myuser = User.last_name = lname
-        myuser.save()
+        myuser.save(username)
 
         return redirect("Home")
     else:

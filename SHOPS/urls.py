@@ -9,4 +9,6 @@ urlpatterns = [
     path('trackorder/', views.TrackOrder, name='Trackorder'),
     path('addtocart/', views.Addtocart, name='addtocart'),
     path('authorization/', views.Authorization, name="Useratuhorization"),
+    path('Services/', views.Services, name="services")
+    path('New_lister/', views.New_lister, name="services")
 ]
